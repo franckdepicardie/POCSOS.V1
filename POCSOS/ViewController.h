@@ -7,8 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <SalesforceSDKCore/SFRestAPI.h>
 
 @interface ViewController : UIViewController
+
+
+@property (weak, nonatomic) IBOutlet UIWebView *webView;
 
 
 @end

@@ -7,6 +7,8 @@
 //
 
 #import "RootCustoUiViewController.h"
+@import ServiceCore;
+@import ServiceSOS;
 
 @interface RootCustoUiViewController ()
 
@@ -17,6 +19,21 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    SOSOptions *options = [SOSOptions optionsWithLiveAgentPod:@"d.la1-c1-frf.salesforceliveagent.com"
+                                                        orgId:@"00D58000000OfKl"
+                                                 deploymentId:@"0NW58000000CaWO"];
+    
+    [options setFeatureClientBackCameraEnabled: NO];
+    [options setFeatureClientFrontCameraEnabled: YES];
+    [options setFeatureClientScreenSharingEnabled: NO];
+    [options setInitialCameraType: SOSCameraTypeFrontFacing];
+    
+    // Register a custom onboarding view controller
+    [options setViewControllerClass:[CustoUiViewController class] for:SOSUIPhaseScreenSharing];
+    
+    [[SCServiceCloud sharedInstance].sos startSessionWithOptions:options];
+
 }
 
 - (void)didReceiveMemoryWarning {
